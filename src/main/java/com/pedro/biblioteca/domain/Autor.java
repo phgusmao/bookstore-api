@@ -1,58 +1,55 @@
 package com.pedro.biblioteca.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
 
 @Entity
-public class Genero{
-	
+public class Autor {
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="idGenero")
+	@Column(name="idAutor")
 	private Integer id;
 	private String nome;
+	private String sexo;
 	
-	@OneToMany(mappedBy="genero")
-	private List<Livro> livros = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name="livro_id")
+	private Livro livro;
 
-	public Genero() {
+	public Autor() {
+		
 	}
-
-	public Genero(Integer id, String nome) {
+	
+	public Autor(Integer id, String nome, String sexo) {
 		this.id = id;
 		this.nome = nome;
+		this.sexo = sexo;
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public List<Livro> getLivros() {
-		return livros;
+	public String getSexo() {
+		return sexo;
 	}
-
-	public void setLivros(List<Livro> livros) {
-		this.livros = livros;
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(id, livro, nome, sexo);
 	}
 
 	@Override
@@ -63,9 +60,11 @@ public class Genero{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Genero other = (Genero) obj;
-		return Objects.equals(id, other.id);
+		Autor other = (Autor) obj;
+		return Objects.equals(id, other.id) && Objects.equals(livro, other.livro) && Objects.equals(nome, other.nome)
+				&& Objects.equals(sexo, other.sexo);
 	}
+	
 	
 	
 }

@@ -1,8 +1,8 @@
 package com.pedro.biblioteca.domain;
 
-import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,40 +11,47 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Livro implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
+public class Livro{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="idLivro")
+	private Long id;
 	private String nome;
 	private String nome_autor;
 	private String descricao;
+	private Boolean aluguel;
 	
 	@ManyToOne
-	@JoinColumn(name = "genero_id")
+	@JoinColumn(name="genero_id")
 	private Genero genero;
 
 	public Livro() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
-	public Livro(Integer id, String nome, String nome_autor, String descricao, Genero genero) {
-		super();
+	public Livro(Long id, String nome, String nome_autor, String descricao, Genero genero, Boolean aluguel) {
 		this.id = id;
 		this.nome = nome;
 		this.nome_autor = nome_autor;
 		this.descricao = descricao;
 		this.genero = genero;
+		this.aluguel = aluguel;
 	}
 
-	public Integer getId() {
+	public Boolean getAluguel() {
+		return aluguel;
+	}
+
+	public void setAluguel(Boolean aluguel) {
+		this.aluguel = aluguel;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
