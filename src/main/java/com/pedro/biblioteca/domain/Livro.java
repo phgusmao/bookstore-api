@@ -16,21 +16,25 @@ public class Livro{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="idLivro")
-	private Long id;
+	private Integer id;
 	private String nome;
 	private String nome_autor;
 	private String descricao;
 	private Boolean aluguel;
 	
 	@ManyToOne
-	@JoinColumn(name="genero_id")
+	@JoinColumn(name="idGenero")
 	private Genero genero;
+	
+	@ManyToOne
+	@JoinColumn(name="idEditora")
+	private Editora editora;
 
 	public Livro() {
 		
 	}
 
-	public Livro(Long id, String nome, String nome_autor, String descricao, Genero genero, Boolean aluguel) {
+	public Livro(Integer id, String nome, String nome_autor, String descricao, Genero genero, Editora editora, Boolean aluguel) {
 		this.id = id;
 		this.nome = nome;
 		this.nome_autor = nome_autor;
@@ -47,11 +51,11 @@ public class Livro{
 		this.aluguel = aluguel;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

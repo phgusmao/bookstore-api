@@ -1,5 +1,7 @@
 package com.pedro.biblioteca.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -10,27 +12,34 @@ public class Editora {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="idEditora")
-	private Long id;
+	private Integer id;
 	private String nome;
 	
-	@ManyToOne
-	@JoinColumn(name="livro_id")
-	private Livro livro;
+	@OneToMany(mappedBy="editora")
+	private List<Livro> livros = new ArrayList<>();
 	
+	public List<Livro> getLivros() {
+		return livros;
+	}
+
+	public void setLivros(List<Livro> livros) {
+		this.livros = livros;
+	}
+
 	public Editora() {
 		
 	}
 	
-	public Editora(Long id, String nome) {
+	public Editora(Integer id, String nome) {
 		this.id= id;
 		this.nome = nome;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -40,14 +49,6 @@ public class Editora {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Livro getLivro() {
-		return livro;
-	}
-
-	public void setLivro(Livro livro) {
-		this.livro = livro;
 	}
 
 	@Override
