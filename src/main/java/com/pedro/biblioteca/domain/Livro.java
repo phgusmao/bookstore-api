@@ -2,6 +2,7 @@ package com.pedro.biblioteca.domain;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Livro{
@@ -22,11 +25,13 @@ public class Livro{
 	private String descricao;
 	private Boolean aluguel;
 	
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="idGenero")
 	private Genero genero;
 	
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="idEditora")
 	private Editora editora;
 
@@ -40,6 +45,7 @@ public class Livro{
 		this.nome_autor = nome_autor;
 		this.descricao = descricao;
 		this.genero = genero;
+		this.editora = editora;
 		this.aluguel = aluguel;
 	}
 
@@ -89,6 +95,14 @@ public class Livro{
 
 	public void setGenero(Genero genero) {
 		this.genero = genero;
+	}
+	
+	public Editora getEditora() {
+		return editora;
+	}
+
+	public void setEditora(Editora editora) {
+		this.editora = editora;
 	}
 
 	@Override

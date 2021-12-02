@@ -15,7 +15,7 @@ public class Editora {
 	private Integer id;
 	private String nome;
 	
-	@OneToMany(mappedBy="editora")
+	@ManyToMany(mappedBy="editora", cascade = CascadeType.ALL)
 	private List<Livro> livros = new ArrayList<>();
 	
 	public List<Livro> getLivros() {
