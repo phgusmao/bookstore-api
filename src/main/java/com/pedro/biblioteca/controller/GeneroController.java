@@ -2,6 +2,7 @@ package com.pedro.biblioteca.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pedro.biblioteca.domain.Genero;
+import com.pedro.biblioteca.dtos.GeneroDTO;
 import com.pedro.biblioteca.repositories.GeneroRepository;
 import com.pedro.biblioteca.service.GeneroService;
 
@@ -34,6 +36,13 @@ public class GeneroController {
 	public ResponseEntity<Genero> findById(@PathVariable Integer id) {
 		Genero obj = generoService.findById(id);
 		return ResponseEntity.ok().body(obj);
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<GeneroDTO>> findAll() {
+		List<Genero> list = generoService.findAll();
+		List<GeneroDTO> listDTO = list.stream().map(obj -> new GeneroDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
 	}
 
 }

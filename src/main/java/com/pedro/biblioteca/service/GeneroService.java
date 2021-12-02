@@ -1,5 +1,6 @@
 package com.pedro.biblioteca.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,7 @@ public class GeneroService {
 				"Objeto não encontrado! Id:" + id + ", Tipo: " + Genero.class.getName()));
 	}
 	
-	//public Genero findAll() {
-		//List<Genero> obj = generoRepository.findAll();
-		//return obj;
-	//}
+	public List<Genero> findAll() {
+		return generoRepository.findAll();
+	}
 }
