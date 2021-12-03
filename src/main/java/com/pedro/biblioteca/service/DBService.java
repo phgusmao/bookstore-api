@@ -28,6 +28,7 @@ public class DBService {
 		Genero gen2 = new Genero(null, "Romance");
 		Genero gen3 = new Genero(null, "Informática");
 		Genero gen4 = new Genero(null, "Ficção Científica");
+		Genero gen5 = new Genero(null, "Terror");
 
 		Editora edt1 = new Editora(null, "Rocco");
 		Editora edt2 = new Editora(null, "Arqueiro");
@@ -48,7 +49,7 @@ public class DBService {
 		edt2.getLivros().addAll(Arrays.asList(l1));
 		edt3.getLivros().addAll(Arrays.asList(l2, l3));
 
-		generoRepository.saveAll(Arrays.asList(gen1, gen2, gen3, gen4));
+		generoRepository.saveAll(Arrays.asList(gen1, gen2, gen3, gen4, gen5));
 		livroRepository.saveAll(Arrays.asList(l1, l2, l3, l4, l5));
 		editoraRepository.saveAll(Arrays.asList(edt1, edt2, edt3));
 	}

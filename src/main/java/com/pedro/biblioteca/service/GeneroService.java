@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pedro.biblioteca.domain.Genero;
+import com.pedro.biblioteca.dtos.GeneroDTO;
 import com.pedro.biblioteca.repositories.GeneroRepository;
 import com.pedro.biblioteca.service.exceptions.ObjectNotFoundException;
 
@@ -24,5 +25,21 @@ public class GeneroService {
 	
 	public List<Genero> findAll() {
 		return generoRepository.findAll();
+	}
+	
+	public Genero create(Genero obj) {
+		obj.setId(null);
+		return generoRepository.save(obj);
+	}
+
+	public Genero update(Integer id, GeneroDTO objDTO) {
+		Genero obj = findById(id);
+		obj.setNome(objDTO.getNome());
+		return generoRepository.save(obj);
+	}
+
+	public void delete(Integer id) {
+		findById(id);
+		generoRepository.deleteById(id);
 	}
 }
